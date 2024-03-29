@@ -1,10 +1,10 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
-import userService from '@/services/user';
 import { useRoute, useRouter } from 'vue-router';
 import { getEditUser } from '@/utils/user.js'
 import { useStore } from '@/stores/index.js';
-import { ElMessageBox } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import userService from '@/services/user';
 import Cookies from 'js-cookie';
 
 const store = useStore();
@@ -67,10 +67,12 @@ async function handleConfirm() {
     await editUserReq();
     const TOKEN_KEY = 'web_token';
     Cookies.remove(TOKEN_KEY);
-    location.reload()
+    setTimeout(() => {
+        location.reload()
+    }, 700)
 }
 
-function handleConcel(){
+function handleConcel() {
     Object.assign(editUser, originUser);
     dialogVisible.value = false;
 }
@@ -88,10 +90,16 @@ const handleClose = (done) => {
 async function editUserReq() {
     await userService.editUser({ id: userId.value, name: editUser.name, phone: editUser.phone, password: editUser.password, role: editUser.role }).then(function (data) {
         if (data.code === 200) {
-            alert('修改成功！');
-            if (userId.value !== loginUserID) {
-                router.push({ name: 'UserIndex' })
-            }
+            ElMessage({
+                message: '修改成功！',
+                type: 'success',
+            })
+            setTimeout(() => {
+                if (userId.value !== loginUserID) {
+                    router.push({ name: 'UserIndex' })
+                    location.reload()
+                }
+            }, 700)
         } else {
             console.log(data);
         }
@@ -102,7 +110,10 @@ async function editUserReq() {
 
 async function saveUser() {
     if (!userId.value || !editUser.name || !editUser.phone || !editUser.password || !editUser.role) {
-        alert('params empty!')
+        ElMessage({
+            message: 'params empty!',
+            type: 'error',
+        })
     }
     console.log('userID:', userId.value, "name: ", editUser.name, "phone: ", editUser.phone, "password:", editUser.password, "role:", editUser.role)
 
@@ -117,6 +128,8 @@ async function saveUser() {
 function resetForm() {
     Object.assign(editUser, originUser);
 };
+
+
 </script>
 <template>
     <div class="content-form-wrapper">
@@ -124,10 +137,10 @@ function resetForm() {
             <span>正在编辑的是登录用户，提交保存后需要重新登录，确定要提交吗？</span>
             <template #footer>
                 <div class="dialog-footer">
-                    <el-button @click="handleConcel">取消</el-button>
-                    <el-button type="primary" @click="handleConfirm">
+                    <a-button @click="handleConcel">取消</a-button>
+                    <a-button type="primary" @click="handleConfirm">
                         确定
-                    </el-button>
+                    </a-button>
                 </div>
             </template>
         </el-dialog>
@@ -149,8 +162,9 @@ function resetForm() {
                     </el-select>
                 </el-form-item>
                 <el-form-item>
-                    <el-button class="form-btn" style="margin-right: 8px;" type="primary" @click="saveUser">提 交</el-button>
-                    <el-button class="form-btn" type="button" @click="resetForm">重 置</el-button>
+                    <a-button class="form-btn" style="margin-right: 8px;" type="primary" @click="saveUser">提
+                        交</a-button>
+                    <a-button class="form-btn" type="button" @click="resetForm">重 置</a-button>
                 </el-form-item>
             </el-form>
         </div>

@@ -1,7 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { ref, reactive, onMounted } from 'vue';
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage} from 'element-plus'
 import loginService from '@/services/login'
 import Cookies from 'js-cookie';
 import BasicLayoutFooter from '@/components/layout/BasicLayoutFooter.vue';
@@ -113,12 +113,13 @@ function handlePhoneSubmit() {
       // console.log('登录响应data：', data)
       // console.log('登录data.token：', data.token)
       Cookies.set('web_token', data.token, { expires: 60 })
-      ElMessageBox.alert('登录成功！', '提示', {
-        confirmButtonText: 'OK',
-        callback: () => {
-          location.reload()
-        },
+      ElMessage({
+        message: '登录成功！',
+        type: 'success',
       })
+      setTimeout(() => {
+        location.reload()
+      }, 700)
     } else {
       ElMessage({
         message: "登陆失败，没有该用户",
@@ -147,12 +148,13 @@ function handleAccountSubmit() {
       // console.log('登录响应data：', data)
       // console.log('登录data.token：', data.token)
       Cookies.set('web_token', data.token, { expires: 60 })
-      ElMessageBox.alert('登录成功！', '提示', {
-        confirmButtonText: 'OK',
-        callback: () => {
-          location.reload()
-        },
+      ElMessage({
+        message: '登录成功！',
+        type: 'success',
       })
+      setTimeout(() => {
+        location.reload()
+      }, 700)
     } else {
       ElMessage({
         message: "登陆失败，没有该用户",
@@ -193,10 +195,9 @@ function handleAccountSubmit() {
             </el-col>
             <el-col :span="1"> </el-col>
             <el-col :span="5">
-              <!-- <el-button>：Element UI 的按钮组件；:smsDisabled="smsDisabled"：绑定按钮的禁用状态到 smsDisabled 变量，根据该变量的值决定按钮是否可点击。 -->
-              <el-button :disabled="!canSendSms" :smsDisabled="smsDisabled" @click="handleSmsCode"
+              <a-button :disabled="!canSendSms" :smsDisabled="smsDisabled" @click="handleSmsCode"
                 class="login-form-smsText">{{ smsText
-                }}</el-button>
+                }}</a-button>
             </el-col>
           </el-form-item>
           <div style="display: flex; justify-content: space-between;">
@@ -207,8 +208,8 @@ function handleAccountSubmit() {
           </div>
           <el-form-item>
             <!-- type="primary"：设置按钮的样式为主要样式 -->
-            <el-button style="width: 100%" type="primary" @click="handlePhoneSubmit"
-              class="login-form-loginBtn">登录</el-button>
+            <a-button style="width: 100%" type="primary" @click="handlePhoneSubmit"
+              class="login-form-loginBtn">登录</a-button>
           </el-form-item>
         </el-form>
       </div>
@@ -230,8 +231,8 @@ function handleAccountSubmit() {
             <a class="login-form-forget">忘记密码 ?</a>
           </div>
           <el-form-item>
-            <el-button style="width: 100%" type="primary" @click="handleAccountSubmit"
-              class="login-form-loginBtn">登录</el-button>
+            <a-button style="width: 100%" type="primary" @click="handleAccountSubmit"
+              class="login-form-loginBtn">登录</a-button>
           </el-form-item>
         </el-form>
       </div>
@@ -328,4 +329,8 @@ function handleAccountSubmit() {
     color: #69b1ff;
   }
 }
+
+// .ant-btn{
+//   cursor: pointer;
+// }
 </style>

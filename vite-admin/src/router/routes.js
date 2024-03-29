@@ -4,7 +4,7 @@ import NotFound from '@/views/Common/NotFound.vue';
 import Forbidden from '@/views/Common/ForbiddenIndex.vue'
 import AccountLogin from '@/views/Common/AccountLogin.vue'
 import routesPermission from './routesPermission'
-import routesArticle from './routesArticle'
+import routesClue from './routesClue'
 
 export default [
   {
@@ -29,7 +29,7 @@ export default [
           }
         },
       },
-      ...routesArticle,
+      ...routesClue,
       ...routesPermission
     ]
   },

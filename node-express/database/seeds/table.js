@@ -51,24 +51,21 @@ exports.seed = function (knex) {
         ]),
 
         knex('roles').insert([
-            { id: 1, name: '管理员', slug:'keeper', describe:'同时管理权限和图书'},
-            { id: 2, name: '图书员', slug:'booker', describe:'管理图书'},
+            { id: 1, name: '管理员', slug:'keeper', describe:'同时管理权限和线索'},
+            { id: 2, name: '销售员', slug:'saler', describe:'管理线索'},
         ]),
 
         knex('permissions').insert([
             { id: 1, slug: 'manager-index', name: '用户管理'},
             { id: 2, slug: 'role-index', name: '角色管理'},
-            { id: 3, slug: 'article-index', name: '文章列表管理'},
-            { id: 4, slug: 'article-category', name: '文章分类管理'},
+            { id: 3, slug: 'clue-index', name: '线索管理'},
         ]),
 
         knex('role_permission').insert([
             { role_id: 1, permission_id: 1 },
             { role_id: 1, permission_id: 2 },
             { role_id: 1, permission_id: 3 },
-            { role_id: 1, permission_id: 4 },
             { role_id: 2, permission_id: 3 },
-            { role_id: 2, permission_id: 4 },
         ]),
 
         knex('user_role').insert([

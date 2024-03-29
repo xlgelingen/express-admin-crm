@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive } from 'vue';
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage} from 'element-plus'
 import userService from '@/services/user';
 
 const smsRules = {
@@ -50,13 +50,18 @@ async function addUser() {
     console.log("name: ", formData.name, "phone: ", formData.phone, "password:", formData.password, "role:", formData.role)
     await userService.addUser({ name: formData.name, phone: formData.phone, password: formData.password, role: formData.role }).then(function (data) {
         if (data.code === 200) {
-            ElMessageBox.alert('新建用户成功！', '提示', {
-                confirmButtonText: 'OK',
-                callback: () => {
-                    location.reload()
-                },
+            ElMessage({
+                message: '新建成功！',
+                type: 'success',
             })
+            setTimeout(() => {
+                location.reload()
+            }, 700)
         } else {
+            ElMessage({
+                message: '修改失败！',
+                type: 'error',
+            })
             console.log(data);
         }
     }).catch(function (error) {
@@ -65,13 +70,13 @@ async function addUser() {
 }
 
 function resetForm() {
-  formRef.value.resetFields();
+    formRef.value.resetFields();
 };
 </script>
 <template>
     <div class="content-form-wrapper">
         <div class="content-form">
-            <el-form  ref="formRef" :model="formData" :rules="smsRules" status-icon label-position="top">
+            <el-form ref="formRef" :model="formData" :rules="smsRules" status-icon label-position="top">
                 <el-form-item label="用户名" prop="name">
                     <el-input type="text" placeholder="请输入用户名" v-model="formData.name" autocomplete="on"></el-input>
                 </el-form-item>
@@ -88,8 +93,9 @@ function resetForm() {
                     </el-select>
                 </el-form-item>
                 <el-form-item>
-                    <el-button class="form-btn" style="margin-right: 8px;" type="primary" @click="addUser">提 交</el-button>
-                    <el-button class="form-btn" type="button" @click="resetForm">重 置</el-button>
+                    <a-button class="form-btn" style="margin-right: 8px;" type="primary" @click="addUser">提
+                        交</a-button>
+                    <a-button class="form-btn" @click="resetForm">重 置</a-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -111,7 +117,7 @@ function resetForm() {
     margin: 40px auto;
 }
 
-.form-btn{
+.form-btn {
     transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 </style>

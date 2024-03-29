@@ -36,7 +36,7 @@ watch(route, (to, from) => {
         <div class="logo-section">
             <div class="header-logo-container">
                 <div class="header-logo-content" v-show="!isCollapse">
-                    <svg-icon class="header-logo-element" name="ii-logo"></svg-icon>
+                    <svg-icon class="header-logo-element" name="siderMenu-logo"></svg-icon>
                     <h1 >Admin</h1>
                 </div>
                 <div class="header-logo-collapse-btn" @click="isCollapse = !isCollapse">
@@ -54,7 +54,7 @@ watch(route, (to, from) => {
                         <el-sub-menu v-if="route.children?.length" :index="route.name" :key="route.path">
                             <!-- sub-menu子菜单的名字插槽 -->
                             <template #title>
-                                <svg-icon v-if="route.meta.nav?.icon" :name="route.meta.nav.icon" width="24px"
+                                <svg-icon v-if="route.meta.nav?.icon" :name="`siderMenu-${route.meta.nav.icon}`" width="24px"
                                     height="18px" style="margin-right: 5px;"></svg-icon>
                                 <span>{{ route.meta.nav.title }}</span>
                             </template>
@@ -62,7 +62,7 @@ watch(route, (to, from) => {
                                 <!-- :route 属性是一个自定义的属性，用于存储与当前菜单项关联的路由信息 -->
                                 <el-menu-item v-for="data in route.children" :key="data.name" :index="data.name"
                                     :route="{ name: data.name }">
-                                    <svg-icon v-if="data.meta.nav?.icon" :name="data.meta.nav.icon" width="24px"
+                                    <svg-icon v-if="data.meta.nav?.icon" :name="`siderMenu-${data.meta.nav.icon}`" width="24px"
                                         height="18px" style="margin-right: 5px;"></svg-icon>
                                     <span>{{ data.meta.nav.title }}</span>
                                 </el-menu-item>

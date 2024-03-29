@@ -1,8 +1,8 @@
 <script setup>
 import { ref, reactive } from 'vue';
-import { ElMessage, ElMessageBox } from 'element-plus'
-import roleService from '@/services/role';
 import { useStore } from '@/stores/index.js';
+import { ElMessage} from 'element-plus'
+import roleService from '@/services/role';
 
 const store = useStore();
 
@@ -52,12 +52,13 @@ async function addRole() {
         });
 
         if (data.code === 200) {
-            ElMessageBox.alert('新建角色成功！', '提示', {
-                confirmButtonText: 'OK',
-                callback: () => {
-                    location.reload()
-                },
+            ElMessage({
+                message: '新建成功！',
+                type: 'success',
             })
+            setTimeout(() => {
+                location.reload()
+            }, 700)
         } else {
             console.log(data);
         }
@@ -67,7 +68,7 @@ async function addRole() {
 }
 
 function resetForm() {
-  formRef.value.resetFields();
+    formRef.value.resetFields();
 };
 </script>
 <template>
@@ -92,8 +93,9 @@ function resetForm() {
                     </el-checkbox-group>
                 </el-form-item>
                 <el-form-item>
-                    <el-button class="form-btn" style="margin-right: 8px;" type="primary" @click="addRole">提 交</el-button>
-                    <el-button class="form-btn" type="button" @click="resetForm">重 置</el-button>
+                    <a-button class="form-btn" style="margin-right: 8px;" type="primary" @click="addRole">提
+                        交</a-button>
+                    <a-button class="form-btn" @click="resetForm">重 置</a-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -121,7 +123,7 @@ function resetForm() {
     gap: 10px;
 }
 
-.form-btn{
+.form-btn {
     transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 </style>
