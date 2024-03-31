@@ -8,7 +8,7 @@ const rolesAll = store.roles;
 <template>
     <div class="content-table">
         <div class="content-addRole">
-            <router-link  class="addRole-btn" :to="{ name: 'RoleCreate' }">新增角色</router-link>
+            <router-link class="addRole-btn" :to="{ name: 'RoleCreate' }">新增角色</router-link>
         </div>
         <table class="table-container">
             <tr>
@@ -50,7 +50,7 @@ const rolesAll = store.roles;
 
     .addRole-btn {
         color: #fff;
-        background: #1890ff;
+        background: #000;
         box-shadow: 0 2px 0 rgba(5, 175, 255, 0.1);
         padding: 10px 15px;
         border-radius: 6px;
@@ -58,21 +58,20 @@ const rolesAll = store.roles;
         transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 
         &:hover {
-            color: #fff;
-            background: #40a9ff;
+            color: #ffd04b;
+            // background: #40a9ff;
         }
     }
 }
 
 .role-edit {
-    color: #1890ff;
     font-size: 14px;
     cursor: pointer;
     // transition: all 0.3s ease-in;
-    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 
     &:hover {
-        color: #409eff;
+        color: #ecb314d5;
         font-weight: 600;
     }
 }

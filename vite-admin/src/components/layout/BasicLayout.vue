@@ -13,9 +13,9 @@ const breadcrumb = computed(() => route.matched.filter((data) => data.meta?.brea
 
 <template>
   <div class="page-wrapper">
-    <BasicLayoutSider class="page-sider" />
+    <BasicLayoutHeader class="page-header" />
     <div class="page-mainer">
-      <BasicLayoutHeader class="page-header" />
+      <BasicLayoutSider class="page-sider" />
       <div class="page-body">
         <el-scrollbar >
           <div class="breadcrumb-container">
@@ -29,12 +29,12 @@ const breadcrumb = computed(() => route.matched.filter((data) => data.meta?.brea
           </div>
           <div class="page-body-content-wrapper">
             <router-view></router-view>
-            <BasicLayoutFooter class="page-body-footer" />
           </div>
         </el-scrollbar>
       </div>
       <!-- <BasicLayoutFooter class="page-basic-footer" /> -->
     </div>
+    <BasicLayoutFooter class="page-body-footer" />
   </div>
 </template>
 
@@ -42,20 +42,24 @@ const breadcrumb = computed(() => route.matched.filter((data) => data.meta?.brea
 .page-wrapper {
   height: 100vh;
   min-width: fit-content;
-  background: linear-gradient(#ffffff, #f5f5f5 28%);
+  // background: linear-gradient(#ffffff, #f5f5f5 28%);
   display: flex;
+  flex-direction: column;
 }
 
 .page-mainer {
   flex: 1;
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
 
   .page-body {
     flex: 1;
     padding: 8px;
     padding-bottom: 0;
-    height: 1px;
+    height: 100%;
+    // background-color: rgba(255, 255, 255, 0.6);
+    background: #f5f5f5;
+
     :deep(.el-scrollbar__view) {
       height: 100%;
     }

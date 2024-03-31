@@ -260,8 +260,8 @@ function handleResetForm() {
                     </el-form-item>
                     <el-form-item>
                         <a-space>
-                            <a-button type="primary" @click="handleSaveUser">保存</a-button>
-                            <a-button @click="handleResetForm">重置</a-button>
+                            <a-button class="form-btn-submit" type="primary" @click="handleSaveUser">保存</a-button>
+                            <a-button class="form-btn-reset" @click="handleResetForm">重置</a-button>
                         </a-space>
                     </el-form-item>
                 </el-form>
@@ -281,7 +281,7 @@ function handleResetForm() {
 
     .addUser-btn {
         color: #fff;
-        background: #1890ff;
+        background: #000;
         box-shadow: 0 2px 0 rgba(5, 175, 255, 0.1);
         padding: 10px 15px;
         border-radius: 6px;
@@ -289,20 +289,21 @@ function handleResetForm() {
         transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 
         &:hover {
-            color: #fff;
-            background: #40a9ff;
+            color: #ffd04b;
+            // background: #40a9ff;
         }
     }
 }
 
 .user-edit {
-    color: #1890ff;
+    // color: #ffd04b;
     font-size: 14px;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 
     &:hover {
-        color: #409eff;
+        // color: #409eff;
+        color: #ecb314d5;
         font-weight: 600;
     }
 }
@@ -353,5 +354,77 @@ function handleResetForm() {
 .table-pagination {
     margin-top: 24px;
     text-align: right;
+}
+
+.form-btn-submit {
+    background-color: #000;
+    color: #fff;
+
+    &:hover {
+        background-color: #000;
+        color: #ffd04b;
+        cursor: pointer;
+    }
+}
+
+.form-btn-reset {
+    &:hover {
+        color: #000;
+        border-color: #000;
+        box-shadow: 0 0 0 2px rgba(4, 13, 19, 0.1);
+        cursor: pointer;
+    }
+}
+</style>
+<style lang="less">
+.ant-pagination.ant-pagination-mini .ant-pagination-item {
+    border-color: #d9d9d9;
+    transition: all 0.3s;
+}
+
+.ant-pagination .ant-pagination-item-active {
+    &:hover {
+        border-color: #000;
+        box-shadow: 0 0 0 2px rgba(4, 13, 19, 0.1);
+    }
+
+    a {
+        color: rgba(0, 0, 0, 0.7);
+        transition: all 0.3s;
+
+        &:hover {
+            color: #000;
+        }
+    }
+
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    transition: all 0.3s;
+}
+
+.ant-select:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover .ant-select-selector {
+    border-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 0 2px rgba(4, 13, 19, 0.1);
+}
+
+.ant-pagination .ant-pagination-options-quick-jumper input:hover {
+    border-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 0 2px rgba(4, 13, 19, 0.1);
+}
+
+.ant-pagination .ant-pagination-options-quick-jumper input:focus {
+    border-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 0 2px rgba(4, 13, 19, 0.1);
+}
+
+.ant-select-focused:where(.css-dev-only-do-not-override-1hsjdkk).ant-select:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector {
+    border-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 0 2px rgba(4, 13, 19, 0.1);
+}
+
+.el-select-dropdown__item.is-selected {
+    color: #000;
+    font-weight: 700;
 }
 </style>

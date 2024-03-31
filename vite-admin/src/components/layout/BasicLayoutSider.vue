@@ -35,10 +35,10 @@ watch(route, (to, from) => {
     <div class="sider-section" :style="[{ width: isCollapse ? '80px' : '243px' }]">
         <div class="logo-section">
             <div class="header-logo-container">
-                <div class="header-logo-content" v-show="!isCollapse">
+                <!-- <div class="header-logo-content" v-show="!isCollapse">
                     <svg-icon class="header-logo-element" name="siderMenu-logo"></svg-icon>
                     <h1 >Admin</h1>
-                </div>
+                </div> -->
                 <div class="header-logo-collapse-btn" @click="isCollapse = !isCollapse">
                     <RotateLeftOutlined />
                 </div>
@@ -47,23 +47,24 @@ watch(route, (to, from) => {
         <div class="menu-section">
             <el-scrollbar>
                 <!-- :router是否启用vue-router模式。启用该模式会在激活导航时以:index作为path进行路由跳转，使用default-active来设置加载时的激活项。-->
-                <el-menu :collapse="isCollapse" :router="true" :default-active="activeIndex">
+                <el-menu :collapse="isCollapse" :router="true" :default-active="activeIndex" active-text-color="#ffd04b"
+                    background-color="#000" text-color="#ccc">
                     <!-- <template> 标签的v-for渲染-->
                     <template v-for="route in navRoutes">
                         <!-- 若有子路由，渲染这个 --> <!-- 以:index作为path进行路由跳转 -->
                         <el-sub-menu v-if="route.children?.length" :index="route.name" :key="route.path">
                             <!-- sub-menu子菜单的名字插槽 -->
                             <template #title>
-                                <svg-icon v-if="route.meta.nav?.icon" :name="`siderMenu-${route.meta.nav.icon}`" width="24px"
-                                    height="18px" style="margin-right: 5px;"></svg-icon>
+                                <svg-icon v-if="route.meta.nav?.icon" :name="`siderMenu-${route.meta.nav.icon}`"
+                                    width="24px" height="18px" style="margin-right: 5px;"></svg-icon>
                                 <span>{{ route.meta.nav.title }}</span>
                             </template>
                             <el-menu-item-group>
                                 <!-- :route 属性是一个自定义的属性，用于存储与当前菜单项关联的路由信息 -->
                                 <el-menu-item v-for="data in route.children" :key="data.name" :index="data.name"
                                     :route="{ name: data.name }">
-                                    <svg-icon v-if="data.meta.nav?.icon" :name="`siderMenu-${data.meta.nav.icon}`" width="24px"
-                                        height="18px" style="margin-right: 5px;"></svg-icon>
+                                    <svg-icon v-if="data.meta.nav?.icon" :name="`siderMenu-${data.meta.nav.icon}`"
+                                        width="24px" height="18px" style="margin-right: 5px;"></svg-icon>
                                     <span>{{ data.meta.nav.title }}</span>
                                 </el-menu-item>
                             </el-menu-item-group>
@@ -89,44 +90,53 @@ watch(route, (to, from) => {
     transition: all 0.2s ease;
     display: flex;
     flex-direction: column;
+    background-color: #000;
     border-right: 1px solid rgba(5, 5, 5, 0.06);
 
 
     .menu-section {
+        flex: 1;
         max-height: calc(100vh - 56px);
+        // background-color: rgba(255, 255, 255, 0.6);
     }
 }
 
 .menu-section {
     .el-menu {
         border-right: none;
-        background: linear-gradient(#ffffff, #f5f5f5 28%);
+        // background: linear-gradient(#ffffff, #f5f5f5 28%);
     }
 
     .el-menu-item-group {
-        background: #f5f5f5
+        // background: #f5f5f5
     }
 
     .el-menu-item.is-active {
-        background-color: #ecf5ff;
+        background: #f5f5f541;
         border-right: 2px solid;
     }
 
-    .el-menu-item:not(.is-active):hover,
+    .el-menu-item:hover,
     :deep(.el-sub-menu__title:hover) {
-        color: #409eff;
-        background-color: inherit;
+        // color: #409eff;
+        background-color: rgb(67, 74, 80);
     }
 
 }
 
+.anticon{
+    color: white;
+}
+
+
 .header-logo-container {
     display: flex;
     height: 54px;
-    justify-content: space-between;
+    // justify-content: flex-end;
     align-items: center;
     padding: 0 20px;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: #000;
+    // background-color: rgba(255, 255, 255, 0.6);
 
     .header-logo-content {
         display: flex;
@@ -160,4 +170,8 @@ watch(route, (to, from) => {
         // width: 80px;
     }
 }
+</style>
+
+<style type="text/css" lang="less" >
+
 </style>

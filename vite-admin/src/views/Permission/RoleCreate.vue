@@ -87,15 +87,15 @@ function resetForm() {
                 <el-form-item prop="permissions" label="权限">
                     <el-checkbox-group v-model="formData.permissions" class="checkbox-grid">
                         <el-checkbox v-for="permission in allPermissions" :value="permission.id" name="type"
-                            :key="permission.id">
+                            :key="permission.id" class="checkbox-permission">
                             {{ permission.name }}
                         </el-checkbox>
                     </el-checkbox-group>
                 </el-form-item>
                 <el-form-item>
-                    <a-button class="form-btn" style="margin-right: 8px;" type="primary" @click="addRole">提
+                    <a-button class="form-btn form-btn-submit" style="margin-right: 8px;" type="primary" @click="addRole" >提
                         交</a-button>
-                    <a-button class="form-btn" @click="resetForm">重 置</a-button>
+                    <a-button class="form-btn form-btn-reset" @click="resetForm" >重 置</a-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -125,5 +125,64 @@ function resetForm() {
 
 .form-btn {
     transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.form-btn-submit {
+    background-color: #000;
+    color: #fff;
+
+    &:hover {
+        background-color: #000;
+        color: #ffd04b;
+        cursor: pointer;
+    }
+}
+
+.form-btn-reset {
+    // background-color: #000;
+    // color: #fff;
+
+    &:hover {
+        // border-color: #ffd04b;
+        color: #000;
+        border-color: #000;
+        box-shadow: 0 0 0 2px rgba(4, 13, 19, 0.1);
+        cursor: pointer;
+    }
+}
+</style>
+
+<style lang="less">
+.el-input__wrapper.is-focus {
+    border-color: #000 !important;
+    box-shadow: 0 0 0 2px rgba(4, 13, 19, 0.1);
+}
+.el-select__wrapper.is-focused.el-tooltip__trigger.el-tooltip__trigger{
+    border-color: #000 !important;
+    box-shadow: 0 0 0 2px rgba(4, 13, 19, 0.1);
+}
+.el-textarea__inner:focus  {
+    border-color: #000 !important;
+    box-shadow: 0 0 0 2px rgba(4, 13, 19, 0.1);
+}
+
+
+.checkbox-permission .el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  border-color: #7d7c7c!important;
+  background-color: #7d7c7c!important;
+}
+
+.checkbox-permission .el-checkbox__input.is-focus .el-checkbox__inner {
+  border-color: #7d7c7c!important;
+}
+
+.checkbox-permission .el-checkbox__input .el-checkbox__inner:hover {
+  border-color: #7d7c7c !important;
+}
+
+
+.checkbox-permission .el-checkbox__input.is-checked+.el-checkbox__label {
+  color: #000 !important;
 }
 </style>

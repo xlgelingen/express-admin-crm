@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive } from 'vue';
-import { ElMessage} from 'element-plus'
+import { ElMessage } from 'element-plus'
 import userService from '@/services/user';
 
 const smsRules = {
@@ -78,24 +78,28 @@ function resetForm() {
         <div class="content-form">
             <el-form ref="formRef" :model="formData" :rules="smsRules" status-icon label-position="top">
                 <el-form-item label="用户名" prop="name">
-                    <el-input type="text" placeholder="请输入用户名" v-model="formData.name" autocomplete="on"></el-input>
+                    <el-input type="text" placeholder="请输入用户名" v-model="formData.name" autocomplete="on"
+                        class="form-input"></el-input>
                 </el-form-item>
                 <el-form-item label="手机号" prop="phone">
-                    <el-input type="number" placeholder="请输入手机号" v-model="formData.phone" autocomplete="on"></el-input>
+                    <el-input type="number" placeholder="请输入手机号" v-model="formData.phone" autocomplete="on"
+                        class="form-input"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="password">
-                    <el-input type="text" placeholder="请输入密码" v-model="formData.password" autocomplete="on"></el-input>
+                    <el-input type="text" placeholder="请输入密码" v-model="formData.password" autocomplete="on"
+                        class="form-input"></el-input>
                 </el-form-item>
                 <el-form-item label="角色" prop="role">
-                    <el-select v-model="formData.role" placeholder="请选择角色" autocomplete="on">
+                    <el-select v-model="formData.role" placeholder="请选择角色" autocomplete="on" class="form-select">
                         <el-option label="管理员" value="1" />
                         <el-option label="图书员" value="2" />
                     </el-select>
                 </el-form-item>
                 <el-form-item>
-                    <a-button class="form-btn" style="margin-right: 8px;" type="primary" @click="addUser">提
+                    <a-button class="form-btn form-btn-submit" style="margin-right: 8px;" type="primary"
+                        @click="addUser">提
                         交</a-button>
-                    <a-button class="form-btn" @click="resetForm">重 置</a-button>
+                    <a-button class="form-btn form-btn-reset" @click="resetForm">重 置</a-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -119,5 +123,40 @@ function resetForm() {
 
 .form-btn {
     transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.form-btn-submit {
+    background-color: #000;
+    color: #fff;
+
+    &:hover {
+        background-color: #000;
+        color: #ffd04b;
+        cursor: pointer;
+    }
+}
+
+.form-btn-reset {
+    // background-color: #000;
+    // color: #fff;
+
+    &:hover {
+        // border-color: #ffd04b;
+        color: #000;
+        border-color: #000;
+        box-shadow: 0 0 0 2px rgba(4, 13, 19, 0.1);
+        cursor: pointer;
+    }
+}
+</style>
+
+<style lang="less">
+.el-input__wrapper.is-focus {
+    border-color: #000 !important;
+    box-shadow: 0 0 0 2px rgba(4, 13, 19, 0.1);
+}
+.el-select__wrapper.is-focused.el-tooltip__trigger.el-tooltip__trigger{
+    border-color: #000 !important;
+    box-shadow: 0 0 0 2px rgba(4, 13, 19, 0.1);
 }
 </style>

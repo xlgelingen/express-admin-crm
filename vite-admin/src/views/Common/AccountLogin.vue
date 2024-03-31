@@ -1,7 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { ref, reactive, onMounted } from 'vue';
-import { ElMessage} from 'element-plus'
+import { ElMessage } from 'element-plus'
 import loginService from '@/services/login'
 import Cookies from 'js-cookie';
 import BasicLayoutFooter from '@/components/layout/BasicLayoutFooter.vue';
@@ -171,70 +171,76 @@ function handleAccountSubmit() {
 </script>
 <template>
   <div class="login-page">
-    <div class="company-container">
-      <img class="company-info-logo" src="@/assets/images/header-logo.svg" />
-      <div class="company-info-desc">小具影响力的 Web 设计规范</div>
+    <div class="page-header">
+      <a class="header-logo-container" href="https://www.mercedes-benz.com.cn/homepage.html">
+        <img class="header-logo" src="/images/header.png">
+      </a>
     </div>
-    <div class="form-container">
-      <div class="change-form-list">
-        <div :class="{ 'active': phoneIsActive }" class="change-form-item" @click="phoneActive">手机号登录</div>
-        <div :class="{ 'active': accountIsActive }" class="change-form-item" @click="accountActive">账户密码登录</div>
+    <div class="page-mainer">
+      <div class="page-mainer-company">
+        <div class="pmc-title"></div>
       </div>
-      <div class="login-form login-form-phone" v-show="phoneIsActive">
-        <!-- Element UI 的表单组件 将表单组件与 formData 数据对象进行双向数据绑定，指定表单的验证规则为 smsRules 对象， -->
-        <el-form :model="formData" :rules="smsRules">
-          <!-- prop 属性：指定表单项的字段名，用于验证规则的匹配。 -->
-          <el-form-item prop="phone">
-            <!-- Element UI 的输入框组件，autocomplete="off"关闭自动填充功能 -->
-            <el-input type="number" placeholder="请输手机号" v-model="formData.phone" autocomplete="on"></el-input>
-          </el-form-item>
-          <el-form-item prop="code">
-            <!-- <el-col>：Element UI 的栅格布局组件，用于实现表单项的布局；:span="14"：指定栅格列的宽度比例，这里表示该栅格宽度为14个列 -->
-            <el-col :span="14">
-              <el-input type="text" placeholder="请输入验证码" v-model="formData.code" autocomplete="off"></el-input>
-            </el-col>
-            <el-col :span="1"> </el-col>
-            <el-col :span="5">
-              <a-button :disabled="!canSendSms" :smsDisabled="smsDisabled" @click="handleSmsCode"
-                class="login-form-smsText">{{ smsText
-                }}</a-button>
-            </el-col>
-          </el-form-item>
-          <div style="display: flex; justify-content: space-between;">
-            <el-form-item prop="checked">
-              <el-checkbox v-model="formData.checked">自动登录</el-checkbox>
+      <div class="page-mainer-form">
+        <div class="change-form-list">
+          <div :class="{ 'active': phoneIsActive }" class="change-form-item" @click="phoneActive">手机号登录</div>
+          <div :class="{ 'active': accountIsActive }" class="change-form-item" @click="accountActive">账户密码登录</div>
+        </div>
+        <div class="login-form login-form-phone" v-show="phoneIsActive">
+          <!-- Element UI 的表单组件 将表单组件与 formData 数据对象进行双向数据绑定，指定表单的验证规则为 smsRules 对象， -->
+          <el-form :model="formData" :rules="smsRules">
+            <!-- prop 属性：指定表单项的字段名，用于验证规则的匹配。 -->
+            <el-form-item prop="phone">
+              <!-- Element UI 的输入框组件，autocomplete="off"关闭自动填充功能 -->
+              <el-input type="number" placeholder="请输手机号" v-model="formData.phone" autocomplete="on"></el-input>
             </el-form-item>
-            <a class="login-form-forget">忘记密码 ?</a>
-          </div>
-          <el-form-item>
-            <!-- type="primary"：设置按钮的样式为主要样式 -->
-            <a-button style="width: 100%" type="primary" @click="handlePhoneSubmit"
-              class="login-form-loginBtn">登录</a-button>
-          </el-form-item>
-        </el-form>
-      </div>
+            <el-form-item prop="code">
+              <!-- <el-col>：Element UI 的栅格布局组件，用于实现表单项的布局；:span="14"：指定栅格列的宽度比例，这里表示该栅格宽度为14个列 -->
+              <el-col :span="14">
+                <el-input type="text" placeholder="请输入验证码" v-model="formData.code" autocomplete="off"></el-input>
+              </el-col>
+              <el-col :span="1"> </el-col>
+              <el-col :span="5">
+                <a-button :disabled="!canSendSms" :smsDisabled="smsDisabled" @click="handleSmsCode"
+                  class="login-form-smsText">{{ smsText
+                  }}</a-button>
+              </el-col>
+            </el-form-item>
+            <div style="display: flex; justify-content: space-between;">
+              <el-form-item prop="checked">
+                <el-checkbox v-model="formData.checked" class="login-form-auto" fill="#00ADEF">自动登录</el-checkbox>
+              </el-form-item>
+              <a class="login-form-forget">忘记密码 ?</a>
+            </div>
+            <el-form-item>
+              <!-- type="primary"：设置按钮的样式为主要样式 -->
+              <a-button style="width: 100%" type="primary" @click="handlePhoneSubmit"
+                class="login-form-loginBtn">登录</a-button>
+            </el-form-item>
+          </el-form>
+        </div>
 
-      <div class="login-form login-form-account" v-show="accountIsActive">
-        <el-form :model="formData" :rules="smsRules">
-          <el-form-item prop="phone">
-            <el-input type="number" placeholder="请输手机号" v-model="formData.phone" autocomplete="on"></el-input>
-          </el-form-item>
-          <el-form-item prop="password">
-            <el-col :span="24">
-              <el-input type="text" placeholder="请输入密码" v-model="formData.password" autocomplete="on"></el-input>
-            </el-col>
-          </el-form-item>
-          <div style="display: flex; justify-content: space-between;">
-            <el-form-item prop="checked">
-              <el-checkbox v-model="formData.checked">自动登录</el-checkbox>
+        <div class="login-form login-form-account" v-show="accountIsActive">
+          <el-form :model="formData" :rules="smsRules">
+            <el-form-item prop="phone">
+              <el-input type="number" placeholder="请输手机号" v-model="formData.phone" autocomplete="on"></el-input>
             </el-form-item>
-            <a class="login-form-forget">忘记密码 ?</a>
-          </div>
-          <el-form-item>
-            <a-button style="width: 100%" type="primary" @click="handleAccountSubmit"
-              class="login-form-loginBtn">登录</a-button>
-          </el-form-item>
-        </el-form>
+            <el-form-item prop="password">
+              <el-col :span="24">
+                <el-input type="text" placeholder="请输入密码" v-model="formData.password" autocomplete="on"></el-input>
+              </el-col>
+            </el-form-item>
+            <div style="display: flex; justify-content: space-between;">
+              <el-form-item prop="checked">
+                <el-checkbox v-model="formData.checked" class="login-form-auto" fill="#00ADEF">自动登录</el-checkbox>
+              </el-form-item>
+              <a class="login-form-forget">忘记密码 ?</a>
+            </div>
+            <el-form-item>
+              <a-button style="width: 100%" type="primary" @click="handleAccountSubmit"
+                class="login-form-loginBtn">登录</a-button>
+            </el-form-item>
+          </el-form>
+        </div>
       </div>
     </div>
     <BasicLayoutFooter />
@@ -243,28 +249,62 @@ function handleAccountSubmit() {
 
 <style lang="less" scoped>
 .login-page {
+  // color: #00ADEF;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: url('https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/V-_oS6r-i7wAAAAAAAAAAAAAFl94AQBr');
-  background-size: 100% 100%;
-  background-position: center;
-  padding-top: 130px;
+  background: url("images/login-bg.jpg") no-repeat top / cover;
+  // padding-top: 130px;
   box-sizing: border-box;
 }
 
-.company-container {
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 1366px;
+  padding: 10px 7% 10px 7%;
+  background: #000;
+}
+
+.header-logo-container {
+  margin-top: 6px;
+  font-size: 0;
+}
+
+.header-logo {
+  width: 260px;
+  height: 64px;
+}
+
+.page-mainer {
+  // flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  padding: 30px 50px;
+  // background-color: aliceblue;
+  background: #fff;
+  // opacity: 0.8;
+}
+
+.page-mainer-company {
+  width: 100%;
   text-align: center;
 
-  .company-info-logo {
-    height: 44px;
-  }
-
-  .company-info-desc {
-    margin-top: 12px;
-    font-size: 14px;
-    opacity: 0.5;
-    text-align: center;
+  .pmc-title {
+    height: 32px;
+    width: 180px;
+    background: url("images/login-title.png") no-repeat;
+    background-size: 100% 100%;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    // font-family: PingFangSC, Avenir, Helvetica, "Microsoft YaHei", 微软雅黑, Arial, sans-serif;
   }
 }
 
@@ -273,16 +313,18 @@ function handleAccountSubmit() {
   justify-content: center;
   height: 46px;
   margin-bottom: 16px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #d8d4d4
 }
 
 .change-form-item {
   line-height: 46px;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: color 0.3s, opacity 0.3s;
 
-  &:hover {
-    color: #1677ff;
+  &:not(.active):hover {
+    color: #00ADEF;
+    // opacity: 0.6;
+    // font-weight: 600;
   }
 
   &:last-child {
@@ -290,9 +332,9 @@ function handleAccountSubmit() {
   }
 
   &.active {
-    color: #1677ff;
+    color: #00ADEF;
     text-shadow: 0 0 0.25px currentcolor;
-    border-bottom: 2px solid #1677ff;
+    border-bottom: 2px solid #00ADEF;
   }
 }
 
@@ -309,11 +351,27 @@ function handleAccountSubmit() {
 
 .login-form-smsText,
 .login-form-loginBtn {
-  transition: all 0.3s;
+  transition: color 0.3s, opacity 0.3s, border 0.3s;
+}
+
+.login-form-loginBtn {
+  background-color: #00ADEF;
+
+  &:hover {
+    background-color: #53c6f4;
+    // background: #333;
+    // opacity: 0.6;
+  }
 }
 
 .login-form-smsText {
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
+
+  &:hover {
+    color: #00ADEF;
+    border: 1px solid #00ADEF;
+    // opacity: 0.6;
+  }
 }
 
 .login-form-forget {
@@ -321,16 +379,37 @@ function handleAccountSubmit() {
   font-size: 14px;
   margin-bottom: 18px;
   line-height: 32px;
-  color: #1677ff;
+  color: #00ADEF;
   cursor: pointer;
   transition: color 0.3s;
 
   &:hover {
-    color: #69b1ff;
+    color: #6bcef5;
   }
 }
 
 // .ant-btn{
 //   cursor: pointer;
 // }
+
+</style>
+<style lang="less">
+.login-form-auto .el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  border-color: #00ADEF !important;
+  background-color: #00ADEF !important;
+}
+
+.login-form-auto .el-checkbox__input.is-focus .el-checkbox__inner {
+  border-color: #00ADEF !important;
+}
+
+.login-form-auto .el-checkbox__input .el-checkbox__inner:hover {
+  border-color: #00ADEF !important;
+}
+
+
+.login-form-auto .el-checkbox__input.is-checked+.el-checkbox__label {
+  color: #00ADEF !important;
+}
 </style>
