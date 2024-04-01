@@ -40,6 +40,7 @@ async function addRole() {
             message: "params empty!",
             type: 'error',
         })
+        return 
     }
     console.log('allPermissions:', allPermissions)
     console.log("name: ", formData.name, "slug: ", formData.slug, "desc:", formData.desc, "permissions:", formData.permissions)

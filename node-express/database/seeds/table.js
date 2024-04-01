@@ -118,7 +118,7 @@ exports.seed = function (knex) {
             { role_id: 1, user_id: 47},
         ]),
 
-        knex('clue').insert([
+        knex('clues').insert([
             {name: '顾一', phone: '13511111111', utm: 'baidu_search', create_time: '2024-01-15 16:30:21', sale_name: '季梦梦', status: 2, remark: '备注1' },
             {name: '季二', phone: '13522222222', utm: 'baidu_search', create_time: '2024-01-15 16:30:21', sale_name: '季梦梦', status: 3, remark: '备注2' },
             {name: '苏三', phone: '13533333333', utm: 'baidu_search', create_time: '2024-01-15 16:32:46', sale_name: '王晨晨', status: 1, remark: '备注3' },

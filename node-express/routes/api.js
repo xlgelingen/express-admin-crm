@@ -4,6 +4,8 @@ var router = express.Router();
 var bookController = require('./../controllers/book')
 var userController = require('./../controllers/user')
 var roleController = require('./../controllers/role')
+var clueController = require('./../controllers/clue')
+var clueLogController = require('../controllers/clue_log');
 var permissionController = require('./../controllers/permission.js')
 var loginController = require('./../controllers/login.js');
 var tokenController = require('../controllers/token')
@@ -36,6 +38,16 @@ router.post('/admin/roles/create', roleController.insert);
 router.post('/admin/roles/edit', roleController.renderEdit);
 router.put('/admin/roles/edit', roleController.update);
 router.delete('/admin/roles/del',roleController.delete);
+
+router.post('/admin/clues/clue-info', clueController.index);
+router.post('/admin/clues/create', clueController.insert);
+router.post('/admin/clues/edit', clueController.renderEdit);
+router.put('/admin/clues/edit', clueController.update);
+
+router.post('/admin/clue_log/log-info', clueLogController.index);
+router.post('/admin/clue_log/create', clueLogController.insert);
+
+
 
 
 

@@ -6,6 +6,7 @@ export const useStore = defineStore('main', {
       users: null,
       user: null,
       roles: null,
+      clues:null,
       permissions: [],
       allPermissions:[],
       navRoutes:[]
@@ -20,6 +21,9 @@ export const useStore = defineStore('main', {
     },
     setRoles(rolesInfo){
       this.roles = rolesInfo
+    },
+    setClues(cluesInfo){
+      this.clues = cluesInfo
     },
     setPermissions(permissions) {
       this.permissions = permissions

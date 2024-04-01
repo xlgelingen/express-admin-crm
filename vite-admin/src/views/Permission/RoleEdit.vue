@@ -53,6 +53,7 @@ async function saveRole() {
             message: 'params empty!',
             type: 'error',
         })
+        return
     }
     console.log('allPermissions:', allPermissions)
     console.log("name: ", editRole.name, "slug: ", editRole.slug, "desc:", editRole.describe, "permissions:", editRole.permissions)
@@ -63,7 +64,9 @@ async function saveRole() {
                 type: 'success',
             })
             setTimeout(() => {
-                router.push({ name: 'RoleIndex' })
+                router.push({ name: 'RoleIndex' }).then(() => {
+                    window.location.reload();
+                });
             }, 700)
         } else {
             console.log(data);
@@ -120,12 +123,6 @@ function resetForm() {
     text-align: center;
     width: 400px;
     margin: 40px auto;
-}
-
-.checkbox-grid {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    gap: 10px;
 }
 
 .form-btn-submit {

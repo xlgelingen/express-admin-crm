@@ -137,6 +137,7 @@ async function handleSaveUser() {
             message: 'params empty!',
             type: 'error',
         })
+        return
     }
     console.log('userID:', userId.value, "name: ", editUser.name, "phone: ", editUser.phone, "password:", editUser.password, "role:", editUser.role)
 
@@ -255,7 +256,7 @@ function handleResetForm() {
                     <el-form-item prop="role" label="角色">
                         <el-select v-model="editUser.role" placeholder="请选择角色" autocomplete="on">
                             <el-option label="管理员" value="1" />
-                            <el-option label="图书员" value="2" />
+                            <el-option label="销售员" value="2" />
                         </el-select>
                     </el-form-item>
                     <el-form-item>

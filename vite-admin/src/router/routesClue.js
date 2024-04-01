@@ -38,19 +38,25 @@ export default [
         }
       },
       {
-        path: ':id',
-        name: 'Cluelog',
+        path: ':id/log',
+        name: 'ClueLog',
         component: ClueLog,
-        // meta: {
-        //   permission: 'clue-index',
-        //   nav: {
-        //     title: '线索追踪'
-        //   },
-        //   breadcrumb: {
-        //     name: '线索追踪'
-        //   }
-        // }
+        meta: {
+          breadcrumb: {
+            name: '线索追踪'
+          }
+        }
       },
+      // {
+      //   path: 'create',
+      //   name: 'LogCreate',
+      //   component: LogCreate,
+      //   meta: {
+      //     breadcrumb: {
+      //       name: '创建追踪'
+      //     }
+      //   }
+      // },
     ]
   }
 ]

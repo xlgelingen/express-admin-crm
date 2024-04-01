@@ -158,7 +158,7 @@ function resetForm() {
                 <el-form-item prop="role" label="角色">
                     <el-select v-model="editUser.role" placeholder="请选择角色" autocomplete="on">
                         <el-option label="管理员" value="1" />
-                        <el-option label="图书员" value="2" />
+                        <el-option label="销售员" value="2" />
                     </el-select>
                 </el-form-item>
                 <el-form-item>

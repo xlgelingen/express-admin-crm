@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import cookies from 'js-cookie';
+import { useStore } from '@/stores/index.js';
 import routes from './routes';
-import NProgress from 'nprogress';
+import cookies from 'js-cookie';
 import userService from '@/services/user';
 import roleService from '@/services/role';
+import clueService from '@/services/clue';
 import permissionService from '@/services/permission';
 import tokenService from '@/services/token';
-import { useStore } from '@/stores/index.js';
+import NProgress from 'nprogress';
 // import { useRoute } from 'vue-router';
 
 // const route = useRoute();
@@ -101,6 +102,7 @@ appRouter.beforeEach(async (to, from, next) => {
       store.setUser(user);
 
       const userId = user.id;
+      const userName = user.name;
       console.log('路由导航/登录用户ID：', userId);
 
       const permissions = await permissionService
@@ -116,8 +118,25 @@ appRouter.beforeEach(async (to, from, next) => {
       store.setPermissions(permissions);
       // console.log('路由导航/store.permissions：', store.permissions, new Date());
 
+      const clues = await clueService
+        .getClues({ userId: userId, userName: userName })
+        .then(function (data) {
+          return data.cluesInfo;
+        })
+        .catch(function (error) {
+          console.log(error);
+          return;
+        });
+      console.log('路由导航/clues：', clues);
+      store.setClues(clues);
+      console.log('路由导航/store-clues：', store.clues);
+
       // 没有要去的页面的权限，就跳去Forbidden页面
-      if (to.meta.permission && !permissions.includes(to.meta.permission) && !['Forbidden'].includes(to.name)) {
+      if (
+        to.meta.permission &&
+        !permissions.includes(to.meta.permission) &&
+        !['Forbidden'].includes(to.name)
+      ) {
         next({ name: 'Forbidden' });
         return;
       }

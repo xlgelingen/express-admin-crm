@@ -1,5 +1,6 @@
 import BasicLayout from '@/components/layout/BasicLayout.vue';
 import Home from '@/views/HomeIndex.vue';
+import Landing from '@/views/LandingIndex.vue';
 import NotFound from '@/views/Common/NotFound.vue';
 import Forbidden from '@/views/Common/ForbiddenIndex.vue'
 import AccountLogin from '@/views/Common/AccountLogin.vue'
@@ -12,13 +13,16 @@ export default [
     name: 'Root',
     component: BasicLayout,
     redirect: {
-      name: 'Home'
+      name: 'Clue'
     },
     children: [
       {
-        path: '/',
+        path: '/home',
         name: 'Home',
         component: Home,
+        redirect: {
+          name: 'Landing'
+        },
         meta: {
           nav: {
             icon: 'icon-home',
@@ -32,6 +36,11 @@ export default [
       ...routesClue,
       ...routesPermission
     ]
+  },
+  {
+    path: '/landing',
+    name: 'Landing',
+    component: Landing,
   },
   {
     path: '/login',

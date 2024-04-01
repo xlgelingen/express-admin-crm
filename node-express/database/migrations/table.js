@@ -34,7 +34,7 @@ exports.up = function (knex) {
         table.integer('permission_id', 11)
       })
       //线索
-      .createTable('clue', function (table) {
+      .createTable('clues', function (table) {
         table.increments('id');
         table.string('name', 255);
         table.string('phone', 255);
@@ -61,7 +61,7 @@ exports.down = function (knex) {
     .dropTable("user_role")
     .dropTable("permissions")
     .dropTable("role_permission")
-    .dropTable("clue")
+    .dropTable("clues")
     .dropTable("clue_log");
 };
 

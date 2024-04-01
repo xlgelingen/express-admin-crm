@@ -46,6 +46,7 @@ async function addUser() {
             message: "params empty!",
             type: 'error',
         })
+        return
     }
     console.log("name: ", formData.name, "phone: ", formData.phone, "password:", formData.password, "role:", formData.role)
     await userService.addUser({ name: formData.name, phone: formData.phone, password: formData.password, role: formData.role }).then(function (data) {
@@ -92,7 +93,7 @@ function resetForm() {
                 <el-form-item label="角色" prop="role">
                     <el-select v-model="formData.role" placeholder="请选择角色" autocomplete="on" class="form-select">
                         <el-option label="管理员" value="1" />
-                        <el-option label="图书员" value="2" />
+                        <el-option label="销售员" value="2" />
                     </el-select>
                 </el-form-item>
                 <el-form-item>
