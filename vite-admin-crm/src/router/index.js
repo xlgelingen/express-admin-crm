@@ -8,6 +8,7 @@ import clueService from '@/services/clue';
 import permissionService from '@/services/permission';
 import tokenService from '@/services/token';
 import NProgress from 'nprogress';
+import 'nprogress/nprogress.css' // nprogress样式
 // import { useRoute } from 'vue-router';
 
 // const route = useRoute();
